@@ -1,5 +1,51 @@
 # 파이썬 자주 쓰는 모듈과 기술
 
+## 📌 내장 함수 관련
+### - n진법 관련 함수
+```
+만약 들어온 수가 N이고 M진법으로 만들고 싶다면,
+answer = ""
+while n > 0:
+    n, re = divmod(n, m)
+    answer += str(re)
+
+# m진법 수를 뒤집은 수가 나오기에 뒤집어줘야함
+answer = answer[::-1]
+
+# 만약 n 진법인 수의 str형태가 존재한다면, 
+answer = int(str, n)
+으로 10진법의 수로 풀어줄수 있다.
+```
+일반적으로 n진법의 수를 구하는 방법이다. 밑의 int(str, n)을 통해 n진법인 수의 str형태를 10진법 int형으로 바꿔 표현 할 수 있다.
+
+```
+a = 200
+# 접두어 제외
+b = format(a, 'b')
+print(f"2진수 : {b}")
+
+c = format(a, 'o')
+print(f"8진수 : {c}")
+
+d = format(a, 'x')
+print(f"16진수 : {d}")
+
+[결과]
+2진수 : 11001000
+8진수 : 310
+16진수 : c8
+```
+하지만 일반적으로 우리가 자주 구하는 2, 8, 16 진수일 경우 다음과 같이 변환하여 사용하는 것이 시간복잡도상 편하게 사용할 수 있다.
+
+### - eval 함수
+```
+s = "3 + 2"
+print(eval(s)) # 5
+```
+eval 함수는 문자열로 되어 있는 수식을 계산해주는 함수이다.
+
+
+
 ## 📌 list 관련
 ### - filter 내장 함수
 ```
@@ -50,6 +96,23 @@ case.sort(key = lambda x:(x[0], x[1]))
 # x[0] 기준으로 정렬하되, 서로 같으면 x[1] 기준으로 정렬한다.
 ```
 리스트안에 비교 해야할 내용들이 다양할 경우에 key 값을 이용하여 비교해서 반환 시킬 수 있다. key = "함수" 가 들어가야한다. 2차원 리스트에서 sort 함수를 쓰면 기본값으로 y값 까지 알아서 정렬해준다라는 점도 알고 있자!
+
+### - del, pop(), remove() 함수
+```
+user_1 = ['Jason' , 'Smith', 'Kevin']
+del user_1[1]    # 'Smith' 삭제
+print(user_1)
+
+user_1 = ['Jason' , 'Smith', 'Kevin']
+user_1.pop(1) # 'Smith' 삭제
+print(user_1)
+
+user_1 = ['Jason' , 'Smith', 'Kevin', 'Smith']
+user_1.remove('Smith') # 'Smith' 삭제
+print(user_1)
+```
+요소 삭제로는 del, pop, remove 함수가 존재하는데 del, pop 함수는 해당 인덱스에 있는 요소를 삭제하는 반면에 remove 함수는 특정값을 삭제하는데 사용된다.  
+
 
 ## 📌 Math 라이브러리
 ### - 절대값 
@@ -106,3 +169,33 @@ c
 Counter({'a': 3, 'b': 0, 'c': -3, 'd': -6})
 ```
 두 번째로는 subtract()함수인데 Counter객체로 만들어진 c, d를 subtract하면 원소끼리의 차를 반환하게 된다.
+
+## 📌 datatime 라이브러리
+### now 함수
+```
+import datetime
+
+d = datetime.datetime.now()
+print (d)
+# 2021-04-18 16:50:43.895283
+```
+datetime 객체는 년,월,일,시,분,초 반환이 가능 요일 같은 경우에는 월~일까지 0 ~ 6까지 숫자로 반환해서 나타내준다
+```
+d = datetime.datetime.now()
+print (d.year,'년 ', d.month,'월 ', d.day,' 일')
+print (d.hour,'시 ',d.minute,'분 ',d.second,'초')
+print(d.weekday())
+
+#
+2021 년  4 월  18  일
+16 시  58 분  38 초
+# 요일 맞는 숫자 반환
+```
+
+현재 시간을 now라는 메소드로 구할수 있으나, 직접 지정한 날짜를 datatime 객체를 통해서 가져올 수 있다.
+
+```
+wuhan_covid19 = datetime.datetime(2019,12,12)
+print (wuhan_covid19)
+# 2019-12-12 00:00:00
+```
