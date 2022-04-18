@@ -44,6 +44,44 @@ print(eval(s)) # 5
 ```
 eval 함수는 문자열로 되어 있는 수식을 계산해주는 함수이다.
 
+### - divmod 함수
+```
+a = 12
+b = 2 
+print(*divmod(a, b))
+# 6 0
+```
+divmod 를 통해 몫과 나머지를 한번에 구할수 있으며, *이라는 언팩킹을 통해 원래 나올 결과인 (6, 0)을 괄호 없이 그냥 6, 0 으로 나타 낼수 있다.
+
+### - ljust, center, rjust 함수
+```
+s = "가나다라"
+n = 7
+s.ljust(n)  #좌측 정렬
+s.center(n) #가운데 정렬
+s.rjust(n)  #우측 정렬
+```
+ljust, center, rjust 함수는 n만큼의 정렬을 시행한다.
+
+
+### - 아주 큰수 inf
+```
+min_val = float('inf')
+min_val > 10000000000
+```
+inf 를 이용하면 파이썬에서 아주 큰수라고 지정할수 있다.
+
+### - enumerate 함수
+```
+>>> for i, name in enumerate(['body', 'foo', 'bar']):
+...     print(i, name)
+...
+0 body
+1 foo
+2 bar
+```
+인덱스와 함께 반환을 하고 싶다면 enumerate 함수를 사용한다.
+
 
 
 ## 📌 list 관련
@@ -114,6 +152,34 @@ print(user_1)
 요소 삭제로는 del, pop, remove 함수가 존재하는데 del, pop 함수는 해당 인덱스에 있는 요소를 삭제하는 반면에 remove 함수는 특정값을 삭제하는데 사용된다.  
 
 
+### - 2차원 함수를 1차원 함수로 바꾸는 방법
+```
+my_list = [[1, 2], [3, 4], [5, 6]]
+
+# 방법 1 - sum 함수
+answer = sum(my_list, [])
+
+# 방법 2 - itertools.chain
+import itertools
+list(itertools.chain.from_iterable(my_list))
+
+# 방법 3 - itertools와 unpacking
+import itertools
+list(itertools.chain(*my_list))
+
+# 방법 4 - list comprehension 이용
+[element for array in my_list for element in array]
+
+# 방법 5 - reduce 함수 이용 1
+from functools import reduce
+list(reduce(lambda x, y: x+y, my_list))
+
+# 방법 6 - reduce 함수 이용 2
+from functools import reduce
+import operator
+list(reduce(operator.add, my_list))
+```
+
 ## 📌 Math 라이브러리
 ### - 절대값 
 ```
@@ -131,8 +197,59 @@ value = sys.stdin.readline()
 
 
 ## 📌 itertools 라이브러리
+### permutations 함수
+```
+import itertools
 
+arr = ['A', 'B', 'C']
+nPr = itertools.permutations(arr, 2)
+print(list(nPr))
 
+결과 : [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
+# permutations(반복 가능한 객체, r)
+```
+순열을 구할때 사용한다. 
+### combinations 함수
+```
+import itertools
+
+arr = ['A', 'B', 'C']
+nCr = itertools.combinations(arr, 2)
+print(list(nCr))
+
+결과 : [('A', 'B'), ('A', 'C'), ('B', 'C')]
+# combinations(반복 가능한 객체, r)
+
+```
+조합을 구할때 사용한다. 
+
+### product 함수
+```
+import itertools
+
+iterable1 = 'ABCD'
+iterable2 = 'xy'
+iterable3 = '1234'
+print(list(itertools.product(iterable1, iterable2, iterable3)))
+# 두 스트링 'ABCD', 'xy' 의 곱집합은 Ax Ay Bx By Cx Cy Dx Dy 입니다.
+
+만약 리스트에서 n개를 뽑아서 중복순열을 구한다고 한다면, 
+
+k = list(product(case, repeat=2))
+repeat 이라는 것을 통해서 한다.
+# product(반복 가능한 객체, repeat=1)
+```
+중복 순열을 구할때 사용되는 함수이다.
+
+### combinations_with_replacemnet 함수
+```
+from itertools import combinations_with_replacement
+
+for cwr in combinations_with_replacement([1,2,3,4], 2):
+    print(cwr, end=" ")
+# combinations_with_replacement(반복 가능한 객체, r)
+```
+중복 조합을 만들때 사용한다.
 
 ## 📌 collections 라이브러리
 ### deque 함수
@@ -199,3 +316,24 @@ wuhan_covid19 = datetime.datetime(2019,12,12)
 print (wuhan_covid19)
 # 2019-12-12 00:00:00
 ```
+
+## string 라이브러리
+### 데이터를 상수로 정의해 놓은것
+```
+import string 
+
+string.ascii_lowercase # 소문자 abcdefghijklmnopqrstuvwxyz
+string.ascii_uppercase # 대문자 ABCDEFGHIJKLMNOPQRSTUVWXYZ
+string.ascii_letters # 대소문자 모두 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+string.digits # 숫자 0123456789
+```
+파이썬에는 이렇게 데이터를 라이브러리화 해서 저장해놓았다.
+
+## bisect 라이브러리
+### 이진탐색 bisect 함수
+```
+import bisect
+mylist = [1, 2, 3, 7, 9, 11, 33]
+print(bisect.bisect(mylist, 3))
+```
+오름차순으로 정렬된 리스트에서 특정한 값의 위치를 찾는 알고리즘이다.
