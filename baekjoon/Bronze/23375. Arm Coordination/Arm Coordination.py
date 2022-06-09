@@ -1,6 +1,0 @@
-a,b = map(int ,input().split())
-r = int(input())
-print(a-r, b+r)
-print(a+r, b+r)
-print(a+r, b-r)
-print(a-r, b-r)
