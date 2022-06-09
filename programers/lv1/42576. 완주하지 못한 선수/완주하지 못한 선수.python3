@@ -1,0 +1,12 @@
+from collections import Counter
+
+def solution(participant, completion):
+    pt = Counter(participant)
+    cp = Counter(completion)
+    pt.subtract(cp)
+    str = ""
+    for a, b in pt.items():
+        if b != 0:
+            str = a
+    
+    return str
