@@ -5,7 +5,5 @@ def solution(nums):
     if count < len(nums):
         answer = count
     else:
-        answer = len(nums)
-    
-    
+        answer = len(nums)   
     return answer
