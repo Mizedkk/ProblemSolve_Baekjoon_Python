@@ -1,9 +1,5 @@
-from math import sqrt
+import math
 
 def solution(n):
-    a = sqrt(n)
-    if a == int(a):
-        return (a+1)**2
-    else:
-        return -1
- 
+    a = math.sqrt(n)
+    return (a+1)**2 if a == int(a) else -1
