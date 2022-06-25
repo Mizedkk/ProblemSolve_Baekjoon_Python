@@ -17,6 +17,7 @@ def func():
         num = 2
 
     while True:
+        
         if str(num) == str(num)[::-1] and prime(num):
             print(num)
             break
