@@ -1,0 +1,17 @@
+from itertools import combinations
+import sys
+import math
+input = lambda: sys.stdin.readline().rstrip()
+
+
+def solution(nums):
+    answer = list(map(sum, combinations(nums, 3)))
+    prime = []
+    for i in answer:
+        for j in range(2, int(math.sqrt(i) + 1)):
+            if i % j == 0:
+                break;
+        else:
+            prime.append(i)
+                
+    return len(prime)
