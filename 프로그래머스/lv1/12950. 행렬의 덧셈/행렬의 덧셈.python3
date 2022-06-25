@@ -1,0 +1,8 @@
+def solution(arr1, arr2):
+    case = []
+    for a, b in zip(arr1, arr2):
+        test = []
+        for c, d in zip(a, b):
+            test.extend([c + d])
+        case.append(test)          
+    return case
