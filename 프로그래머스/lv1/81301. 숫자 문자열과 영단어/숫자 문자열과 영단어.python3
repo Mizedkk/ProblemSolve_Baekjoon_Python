@@ -4,4 +4,3 @@ def solution(s):
         if a in s:
             s = s.replace(a, str(numbers[a]))
     return int(s)
-        

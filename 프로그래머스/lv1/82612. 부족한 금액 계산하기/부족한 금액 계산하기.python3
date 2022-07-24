@@ -6,4 +6,3 @@ def solution(price, money, count):
         return abs(money - temp)
     else:
         return 0
-        

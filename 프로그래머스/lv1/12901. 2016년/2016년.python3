@@ -1,0 +1,5 @@
+import datetime
+
+def solution(a, b):
+    case = ["SUN","MON","TUE","WED","THU","FRI","SAT"]
+    return case[(datetime.datetime(2016, a, b).weekday() + 1) % 7]

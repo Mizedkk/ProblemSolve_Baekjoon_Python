@@ -1,0 +1,18 @@
+def solution(s, n):
+    s = list(s)
+    for i in range(len(s)):
+        if ord(s[i]) != 32:
+            if 64 < ord(s[i]) < 91 :
+                if ord(s[i]) + n > 90:
+                    s[i] = chr(ord(s[i]) - 26 + n)
+                else:
+                    s[i] = chr(ord(s[i]) + n)
+                
+            elif 96 < ord(s[i]) < 123:
+                if ord(s[i]) + n > 122:
+                    s[i] = chr(ord(s[i]) - 26 + n)
+                else:
+                    s[i] = chr(ord(s[i]) + n)
+                
+    answer = "".join(s)
+    return answer
